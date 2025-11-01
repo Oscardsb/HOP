@@ -4,6 +4,12 @@
  */
 package formularios;
 
+import clases.ClsGlobales;
+import db.UsuarioDAO;
+import entidades.Usuario;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Personal
@@ -17,6 +23,10 @@ public class Frmlogin extends javax.swing.JFrame {
      */
     public Frmlogin() {
         initComponents();
+        
+        //Poner imagen (icono de HOP [marca de mi proyecto] en la ventana al iniciar 
+        //Codigo visto de Tutorial de Youtube ya que para acabados de mejor presentacion quise investigar
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/HOP_1.png")).getImage());
     }
 
     /**
@@ -35,7 +45,6 @@ public class Frmlogin extends javax.swing.JFrame {
         HopHorizontal = new javax.swing.JLabel();
         HopHorizontal1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtClave = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
         btnIngresoSistema = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -45,6 +54,7 @@ public class Frmlogin extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        txtClave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("INICIO SESIÓN");
@@ -77,17 +87,6 @@ public class Frmlogin extends javax.swing.JFrame {
         jLabel9.setToolTipText("");
         FondoBlanco1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 120, 40));
 
-        txtClave.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
-        txtClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtClave.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(35, 59, 89), 2, true));
-        txtClave.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClaveActionPerformed(evt);
-            }
-        });
-        FondoBlanco1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 220, 30));
-
         txtCorreo.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(35, 59, 89));
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -106,6 +105,11 @@ public class Frmlogin extends javax.swing.JFrame {
         btnIngresoSistema.setText("INICIAR SESIÓN");
         btnIngresoSistema.setBorder(null);
         btnIngresoSistema.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnIngresoSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresoSistemaActionPerformed(evt);
+            }
+        });
         FondoBlanco1.add(btnIngresoSistema, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 220, 50));
 
         jLabel11.setFont(new java.awt.Font("Baloo 2 ExtraBold", 1, 20)); // NOI18N
@@ -137,6 +141,11 @@ public class Frmlogin extends javax.swing.JFrame {
         intOlvidoCLave.setText("¿Olvidó su contraseña?");
         intOlvidoCLave.setToolTipText("");
         intOlvidoCLave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        intOlvidoCLave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                intOlvidoCLaveMouseClicked(evt);
+            }
+        });
         FondoBlanco1.add(intOlvidoCLave, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, 40));
         FondoBlanco1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 510, 220, 10));
 
@@ -152,6 +161,13 @@ public class Frmlogin extends javax.swing.JFrame {
         jLabel3.setToolTipText("");
         FondoBlanco1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, 40));
 
+        txtClave.setForeground(new java.awt.Color(35, 59, 89));
+        txtClave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtClave.setText("jPasswordField1");
+        txtClave.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(35, 59, 89), 2, true));
+        txtClave.setCaretColor(new java.awt.Color(255, 255, 255));
+        FondoBlanco1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 220, 30));
+
         FondoBlanco.add(FondoBlanco1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 620));
 
         getContentPane().add(FondoBlanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 620));
@@ -164,16 +180,36 @@ public class Frmlogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
-    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveActionPerformed
-
     private void intRegistreseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_intRegistreseMouseClicked
         // TODO add your handling code here:
         FrmRegistro fregistro = new FrmRegistro();
         fregistro.show();
         this.hide();
     }//GEN-LAST:event_intRegistreseMouseClicked
+
+    private void btnIngresoSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoSistemaActionPerformed
+        // TODO add your handling code here:
+        String correo = this.txtCorreo.getText();
+        String clave = this.txtClave.getText();
+        String claveTemp = FrmOlvidoC.generarContraseñaT();
+        
+        
+        boolean validado = UsuarioDAO.validarAcceso(correo, clave);
+        
+        if (validado){
+            ClsGlobales.fprincipal.show();
+            this.hide();
+        }
+        
+    }//GEN-LAST:event_btnIngresoSistemaActionPerformed
+
+    private void intOlvidoCLaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_intOlvidoCLaveMouseClicked
+        // TODO add your handling code here:
+        FrmOlvidoC folvidoContraseña = new FrmOlvidoC();
+        folvidoContraseña.show();
+        this.hide();
+        
+    }//GEN-LAST:event_intOlvidoCLaveMouseClicked
 
     /**
      * @param args the command line arguments
@@ -216,7 +252,7 @@ public class Frmlogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtClave;
+    private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }

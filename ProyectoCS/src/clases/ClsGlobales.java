@@ -5,7 +5,8 @@
 package clases;
 
 import entidades.Usuario;
-import formulario.MDIPrincipal;
+import formularios.MDIPrincipal;
+
 
 /**
  *
