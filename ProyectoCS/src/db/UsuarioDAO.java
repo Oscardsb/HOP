@@ -67,7 +67,13 @@ public class UsuarioDAO {
                 ps.setString(2, correo);
                 ps.executeUpdate();
                 
+                JOptionPane.showMessageDialog(null, "Cambio realizado con exito","Exito",JOptionPane.INFORMATION_MESSAGE);
                 
+             return true;   
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            
+            return false;
         }
     }
     

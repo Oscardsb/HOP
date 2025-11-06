@@ -72,6 +72,11 @@ public class FrmOlvidoC extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -137,7 +142,7 @@ public class FrmOlvidoC extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 120, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 480));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 470));
 
         pack();
         setLocationRelativeTo(null);
@@ -160,20 +165,42 @@ public class FrmOlvidoC extends javax.swing.JFrame {
         
         
         if (validado){
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Su contraseña temporal es:" + generarContraseñaT(),
-                    "Contraseña Temporal",
-                    JOptionPane.PLAIN_MESSAGE
-                );
+            String codigoTemp = generarContraseñaT();
+            System.out.println(codigoTemp);
+            String validar = JOptionPane.showInputDialog(null, 
+                    "Digite el codigo que se le envió al buzon de correo", 
+                    "Digite", 
+                    JOptionPane.INFORMATION_MESSAGE);
             
-            ClsGlobales.fprincipal.show();
-            this.hide();
+            if (validar != null && validar.equals(codigoTemp)) {
+             FrmNewPassword frmNewPassword = new FrmNewPassword();
+             frmNewPassword.show();
+             this.hide();
+                
+            }
+            else {
+                JOptionPane.showMessageDialog(
+                        null, "Codigo incorrecto",
+                        "Validar contraseña",
+                        JOptionPane.ERROR_MESSAGE);
+                
+            
+            
+                
+
+            }
+            
+            
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        Frmlogin flogin = new Frmlogin();
+        flogin.show();
+    }//GEN-LAST:event_formWindowClosed
     
     
-            
             
             
     public static String generarContraseñaT() {

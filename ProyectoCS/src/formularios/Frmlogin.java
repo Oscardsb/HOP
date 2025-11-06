@@ -56,7 +56,7 @@ public class Frmlogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtClave = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("INICIO SESIÓN");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,7 +191,7 @@ public class Frmlogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String correo = this.txtCorreo.getText();
         String clave = this.txtClave.getText();
-        String claveTemp = FrmOlvidoC.generarContraseñaT();
+        
         
         
         boolean validado = UsuarioDAO.validarAcceso(correo, clave);
